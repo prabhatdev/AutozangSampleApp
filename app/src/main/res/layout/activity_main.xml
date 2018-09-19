@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".mvvm.activity.mainactivity.MainActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorPrimary"
+        android:elevation="8dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/logout_add_item"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/back" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="Breakdown Services"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="25sp" />
+
+            <ImageView
+                android:id="@+id/sort_list"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/sort" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar">
+
+        <TextView
+            android:id="@+id/enter_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
+            android:text="Enter Location"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/location_edit_text"
+            android:layout_width="170dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/enter_location"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp" />
+
+        <ImageView
+            android:id="@+id/current_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/location_edit_text"
+            android:layout_below="@+id/enter_location"
+            android:layout_marginLeft="180dp"
+            android:src="@drawable/current_location" />
+
+        <TextView
+            android:id="@+id/auto_detect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/current_location"
+            android:layout_below="@+id/enter_location"
+            android:layout_marginLeft="30dp"
+            android:textSize="10sp"
+            android:textAlignment="center"
+            android:text="Autodetect drop location" />
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="CALL US"
+            android:layout_below="@+id/location_edit_text"
+            android:layout_marginLeft="40dp"
+            android:background="#ecc20a"
+            />
+
+    </RelativeLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayoutItem"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/location"
+        android:layout_marginTop="10dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/service_centres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/location">
+
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</RelativeLayout>

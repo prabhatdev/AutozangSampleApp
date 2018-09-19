@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <ImageView
+            android:layout_width="140dp"
+            android:layout_height="137dp"
+            android:background="#000000" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="15sp"
+                tools:text="Rajalakshmi Service Center" />
+
+            <ImageView
+                android:id="@+id/location_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/location" />
+
+            <TextView
+                android:id="@+id/location_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/location_image"
+                android:layout_below="@+id/name"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="2dp"
+                android:textSize="10sp"
+                tools:text="Tambaram,Chennai" />
+
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/name"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="2dp"
+                android:textSize="10sp"
+                tools:text="2.5Km Away" />
+
+            <ImageView
+                android:id="@+id/star1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/location_text"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/star" />
+
+            <ImageView
+                android:id="@+id/star2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/star1"
+                android:layout_below="@+id/location_text"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/star" />
+
+            <ImageView
+                android:id="@+id/star3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/star2"
+                android:layout_below="@+id/location_text"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/star" />
+
+            <ImageView
+                android:id="@+id/star4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/star3"
+                android:layout_below="@+id/location_text"
+                android:layout_marginStart="17dp"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/star" />
+
+            <TextView
+                android:id="@+id/reviews_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/star4"
+                android:layout_below="@+id/location_text"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="2dp"
+                android:textSize="13sp"
+                tools:text="64 reviews" />
+
+            <ImageView
+                android:id="@+id/calender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/star1"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/calender" />
+
+            <TextView
+                android:id="@+id/working_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/star1"
+                android:layout_alignLeft="@+id/calender"
+                android:layout_marginLeft="19dp"
+                android:layout_marginTop="2dp"
+                android:textSize="10sp"
+                tools:text="Monday to Saturday, 9am to 9pm" />
+
+            <TextView
+                android:id="@+id/standard_charge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/working_days"
+                android:layout_marginTop="1dp"
+                android:text="Basic Standard Service Charge"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/standard_charge"
+                android:layout_marginTop="1dp"
+                android:text="Rs 500/-"
+                android:textColor="#157fe2"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/pick_and_drop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/price"
+                android:layout_marginTop="1dp"
+                android:text="Pick and Drop Available"
+                android:textSize="10sp"
+
+                />
+                <Button
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:background="#ecc20a"
+                    android:text="BOOK NOW"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
