@@ -33,7 +33,14 @@
                 android:text="Breakdown Services"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="25sp" />
+                android:textSize="20sp" />
+            <ImageView
+                android:id="@+id/filter_list"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignRight="@+id/sort_list"
+                android:layout_marginRight="40dp"
+                android:src="@drawable/filter"/>
 
             <ImageView
                 android:id="@+id/sort_list"

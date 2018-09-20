@@ -17,17 +17,23 @@ class ServiceAdapter(val serviceCentres: ArrayList<ServiceCenters>) : RecyclerVi
     override fun getItemCount(): Int = serviceCentres.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindData(serviceCentres[position])
+        holder.bindData(serviceCentres[position],position)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindData(serviceCenters: ServiceCenters) {
+        fun bindData(serviceCenters: ServiceCenters, position: Int) {
             itemView.name.text=serviceCenters.name
             itemView.location_text.text=serviceCenters.location
             itemView.distance.text=serviceCenters.distance.toString()+" Km Away"
             itemView.reviews_text.text=serviceCenters.reviews.toString()+" reviews"
             itemView.working_days.text=serviceCenters.timings
             itemView.price.text="Rs "+serviceCenters.price.toString()
+            if(position%2==0) {
+                itemView.image.setImageResource(R.drawable.capture1)
+            }
+            else {
+                itemView.image.setImageResource(R.drawable.capture2)
+            }
         }
     }
 }

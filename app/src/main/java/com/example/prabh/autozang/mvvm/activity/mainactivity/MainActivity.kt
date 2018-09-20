@@ -19,6 +19,8 @@ import com.example.prabh.autozang.room.table.ServiceCenters
 import com.example.prabh.autozang.utility.ApiType
 import com.example.prabh.autozang.utility.Status
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.layout_filter_type.*
+import kotlinx.android.synthetic.main.layout_filter_type.view.*
 import kotlinx.android.synthetic.main.layout_sort_type.view.*
 import javax.inject.Inject
 
@@ -28,6 +30,7 @@ class MainActivity : AutozangApplication(), SwipeRefreshLayout.OnRefreshListener
     @Inject
     lateinit var mainActivityViewModel: MainActivityViewModel
     private var sortType = "name"
+    private var filterType = "price"
     private var locationManager: LocationManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,9 +46,14 @@ class MainActivity : AutozangApplication(), SwipeRefreshLayout.OnRefreshListener
 
         val locationListener: LocationListener = object : LocationListener {
             override fun onLocationChanged(location: Location) {
-                getLocation(location.longitude, location.latitude)
+                if(isConnected()) {
+                    getLocation(location.longitude, location.latitude)
+                }
+                else
+                {
+                    Toast.makeText(this@MainActivity,("Latitiude:"+location.latitude.toString().subSequence(0,5) + " and Longitude:" + location.longitude.toString().subSequence(0,5)),Toast.LENGTH_LONG).show()
+                }
             }
-
             override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
             override fun onProviderEnabled(provider: String) {}
             override fun onProviderDisabled(provider: String) {}
@@ -53,7 +61,6 @@ class MainActivity : AutozangApplication(), SwipeRefreshLayout.OnRefreshListener
         locationManager = getSystemService(LOCATION_SERVICE) as LocationManager?
         current_location.setOnClickListener {
             try {
-                // Request location updates
                 locationManager?.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0L, 0f, locationListener);
             } catch (ex: SecurityException) {
                 Toast.makeText(this, "Please provide location access", Toast.LENGTH_SHORT).show()
@@ -71,9 +78,9 @@ class MainActivity : AutozangApplication(), SwipeRefreshLayout.OnRefreshListener
         }
 
         sort_list.setOnClickListener {
-
             val builder = AlertDialog.Builder(this@MainActivity)
             val view = LayoutInflater.from(this).inflate(R.layout.layout_sort_type, null, false)
+            view.sort_select.check(R.id.name)
             builder.setView(view)
                     .setTitle("Sort By")
                     .setPositiveButton("Ok") { dialog, which ->
@@ -83,23 +90,49 @@ class MainActivity : AutozangApplication(), SwipeRefreshLayout.OnRefreshListener
                             R.id.distance -> sortType = "distance"
                             R.id.review -> sortType = "reviews"
                         }
-                        setAdapterBySort(sortType)
+                        setAdapterBySortAndFilter(sortType,0)
                     }
                     .setNegativeButton("Cancel") { dialog, which -> }
             val dialogBox = builder.create()
             dialogBox.show()
         }
 
+        filter_list.setOnClickListener {
+            val builder = AlertDialog.Builder(this@MainActivity)
+            val view = LayoutInflater.from(this).inflate(R.layout.layout_filter_type, null, false)
+            view.filter_select.check(R.id.price_filter)
+            builder.setView(view)
+                    .setTitle("Filter By")
+                    .setPositiveButton("Ok") { dialog, which ->
+                        if (!view.filter_value.text.toString().isEmpty()) {
+                            val checkedId = view.filter_select.checkedRadioButtonId
+
+                            when (checkedId) {
+                                R.id.price_filter -> filterType = "price_filter"
+                                R.id.distance_filter -> filterType = "distance_filter"
+                                R.id.review_filter -> filterType = "reviews_filter"
+                            }
+                            setAdapterBySortAndFilter(filterType,view.filter_value.text.toString().toInt())
+                        } else {
+                            Toast.makeText(this, "Please enter a value", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    .setNegativeButton("Cancel") { dialog, which -> }
+            val dialogBox = builder.create()
+            dialogBox.show()
+        }
     }
 
-    private fun setAdapterBySort(sortType: String) {
-        val serviceCenteres=mainActivityViewModel.getSortedData(sortType)
+    private fun setAdapterBySortAndFilter(sortAndFilterType: String,filterValue:Int) {
+        val serviceCenteres = mainActivityViewModel.getSortedAndFilterData(sortAndFilterType,filterValue)
         service_centres.layoutManager = LinearLayoutManager(this)
         service_centres.adapter = ServiceAdapter(serviceCenteres as ArrayList<ServiceCenters>)
     }
 
     private fun initialise() {
-        getData()
+        if (isConnected()) {
+            getData()
+        }
         observeResponse()
         observeServerResponse()
     }
@@ -108,7 +141,6 @@ class MainActivity : AutozangApplication(), SwipeRefreshLayout.OnRefreshListener
         mainActivityViewModel.response.observe(this, Observer {
             processResponse(it)
         })
-
     }
 
     private fun processResponse(response: com.example.prabh.autozang.utility.Response?) {
@@ -157,7 +189,13 @@ class MainActivity : AutozangApplication(), SwipeRefreshLayout.OnRefreshListener
     }
 
     override fun onRefresh() {
-        swipeRefreshLayoutItem.isRefreshing = true
-        getData()
+        if (isConnected()) {
+            swipeRefreshLayoutItem.isRefreshing = true
+            getData()
+        }
+        else
+        {
+            swipeRefreshLayoutItem.isRefreshing=false
+        }
     }
 }

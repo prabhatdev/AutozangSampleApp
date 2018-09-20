@@ -23,7 +23,7 @@ class MainActivityViewModel(private val serviceCenterDao: ServiceCenterDao) : Vi
     fun getDataFromTable(): LiveData<List<ServiceCenters>> {
         return serviceCenterDao.getData()
     }
-    fun getSortedData(sortType:String):List<ServiceCenters> {
+    fun getSortedAndFilterData(sortType:String,filterValue:Int):List<ServiceCenters> {
         var serviceCenteres:List<ServiceCenters>?=null
         when (sortType) {
 
@@ -32,6 +32,12 @@ class MainActivityViewModel(private val serviceCenterDao: ServiceCenterDao) : Vi
             "name" -> serviceCenteres= serviceCenterDao.getSortedDataName()
 
             "reviews" -> serviceCenteres= serviceCenterDao.getSortedDataReviews()
+
+            "price_filter" -> serviceCenteres=serviceCenterDao.getFilteredDataByPrice(filterValue)
+
+            "distance_filter" -> serviceCenteres=serviceCenterDao.getFilteredDataByDistance(filterValue)
+
+            "reviews_filter" -> serviceCenteres=serviceCenterDao.getFilteredDataByReview(filterValue)
         }
         return serviceCenteres!!
     }

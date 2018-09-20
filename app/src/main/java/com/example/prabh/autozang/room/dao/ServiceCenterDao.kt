@@ -24,4 +24,12 @@ interface ServiceCenterDao{
     @Query("SELECT * FROM ServiceCenters ORDER BY name")
     fun getSortedDataName():List<ServiceCenters>
 
+    @Query("SELECT * FROM ServiceCenters where price >= :value")
+    fun getFilteredDataByPrice(value:Int):List<ServiceCenters>
+
+    @Query("SELECT * FROM ServiceCenters where reviews >= :value")
+    fun getFilteredDataByReview(value:Int):List<ServiceCenters>
+
+    @Query("SELECT * FROM ServiceCenters where distance >= :value")
+    fun getFilteredDataByDistance(value:Int):List<ServiceCenters>
 }

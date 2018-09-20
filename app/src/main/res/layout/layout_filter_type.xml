@@ -4,28 +4,38 @@
     android:layout_height="match_parent">
 
     <RadioGroup
-        android:id="@+id/sort_select"
+        android:id="@+id/filter_select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
 
         <RadioButton
-            android:id="@+id/name"
+            android:id="@+id/price_filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name" />
+            android:text="Price" />
 
         <RadioButton
-            android:id="@+id/distance"
+            android:id="@+id/distance_filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Distance" />
 
         <RadioButton
-            android:id="@+id/review"
+            android:id="@+id/review_filter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Review" />
-
     </RadioGroup>
+
+    <EditText
+        android:id="@+id/filter_value"
+        android:layout_width="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/filter_select"
+        android:layout_alignLeft="@id/filter_select"
+        android:hint="Enter Value"
+        android:inputType="number"
+        />
 </RelativeLayout>
